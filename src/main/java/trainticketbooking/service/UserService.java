@@ -47,7 +47,7 @@ public class UserService {
     public Integer bookSeats(BookSeatDto payload) {
         Train train = trainRepository.findById(payload.getTrainId().longValue())
                 .orElseThrow(RuntimeException::new);
-        User user = userRepository.findByUsername(ThreadLocalWithUserContext.getUserContext().getUserName())
+        User user = userRepository.findByUsername(payload.getUserName())
                 .orElseThrow(RuntimeException::new);
 
         train.setSeatsAvailable(train.getSeatsAvailable() - payload.getSeats());
